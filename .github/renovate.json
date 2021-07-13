@@ -8,5 +8,11 @@
   "labels": ["deps"],
   "digest": {
     "extends": ["schedule:daily"]
-  }
+  },
+  "packageRules": [
+    {
+      "packageNames": ["watchtower", "containrrr/watchtower"],
+      "extractVersion": "^v(?<version>\\d+\\.\\d+\\.\\d+)$"
+    }
+  ]
 }

@@ -1,7 +1,7 @@
 # escape=`
 
 # renovate: datasource=github-releases depName=watchtower lookupName=containrrr/watchtower
-ARG WATCHTOWER_VERSION=v1.3.0
+ARG WATCHTOWER_VERSION=1.3.0
 
 FROM mcr.microsoft.com/windows/nanoserver:1809-amd64@sha256:502ecb75e37ada29fa102f92437a0b55504290a715a607d83a2b371811b00d44
 
@@ -24,7 +24,7 @@ LABEL org.opencontainers.image.version="${WATCHTOWER_VERSION}"
 
 RUN `
   mkdir tmp && mkdir bin`
-	&& curl -sSfLo tmp/file.zip https://github.com/containrrr/watchtower/releases/download/%WATCHTOWER_VERSION%/watchtower_windows_amd64.zip `
+	&& curl -sSfLo tmp/file.zip https://github.com/containrrr/watchtower/releases/download/v%WATCHTOWER_VERSION%/watchtower_windows_amd64.zip `
   && tar -C c:\bin -oxzf tmp/file.zip watchtower.exe`
   && rmdir /Q /S tmp `
   && /bin/watchtower --help

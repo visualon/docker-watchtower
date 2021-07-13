@@ -1,5 +1,5 @@
 # renovate: datasource=github-releases depName=watchtower lookupName=containrrr/watchtower
-ARG WATCHTOWER_VERSION=v1.3.0
+ARG WATCHTOWER_VERSION=1.3.0
 
 FROM alpine:3.14@sha256:234cb88d3020898631af0ccbbcca9a66ae7306ecd30c9720690858c1b007d2a0 as base
 
@@ -12,7 +12,7 @@ RUN apk add --no-cache curl
 
 ARG WATCHTOWER_VERSION
 RUN set -ex; \
-  curl -sSfLo file.tgz https://github.com/containrrr/watchtower/releases/download/${WATCHTOWER_VERSION}/watchtower_linux_amd64.tar.gz; \
+  curl -sSfLo file.tgz https://github.com/containrrr/watchtower/releases/download/v${WATCHTOWER_VERSION}/watchtower_linux_amd64.tar.gz; \
   tar -C /bin -xzf file.tgz; \
   watchtower --help
 

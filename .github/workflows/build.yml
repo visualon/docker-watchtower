@@ -163,5 +163,6 @@ jobs:
           allowUpdates: true
           body: See https://github.com/containrrr/watchtower/releases/tag/v${{ env.VERSION }} for more changes
           commit: ${{ github.sha }}
+          name: ${{ env.VERSION }}
           tag: v${{ env.VERSION }}
           token: ${{ secrets.GITHUB_TOKEN }}
