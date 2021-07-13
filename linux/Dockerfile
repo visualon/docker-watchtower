@@ -29,6 +29,8 @@ LABEL maintainer="Michael Kriese <michael.kriese@visualon.de>" \
     org.opencontainers.image.source="https://github.com/visualon/docker-watchtower" \
     org.opencontainers.image.url="https://github.com/visualon/docker-watchtower"
 
+LABEL com.centurylinklabs.watchtower="true"
+
 ENTRYPOINT ["/usr/bin/dumb-init", "--", "/bin/watchtower"]
 
 ARG WATCHTOWER_VERSION
