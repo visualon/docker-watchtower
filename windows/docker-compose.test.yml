@@ -3,8 +3,8 @@ services:
   sut:
     image: "${IMAGE}"
     environment: 
-      WATCHTOWER_RUN_ONCE: true
-      WATCHTOWER_NO_PULL: true
+      WATCHTOWER_RUN_ONCE: 'true'
+      WATCHTOWER_NO_PULL: 'true'
     volumes:
       - source: '\\.\pipe\docker_engine'
         target: '\\.\pipe\docker_engine'

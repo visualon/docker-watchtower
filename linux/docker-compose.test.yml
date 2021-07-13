@@ -3,8 +3,8 @@ services:
   sut:
     image: "${IMAGE}"
     environment: 
-      WATCHTOWER_RUN_ONCE: true
-      WATCHTOWER_NO_PULL: true
+      WATCHTOWER_RUN_ONCE: 'true'
+      WATCHTOWER_NO_PULL: 'true'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     labels: 
