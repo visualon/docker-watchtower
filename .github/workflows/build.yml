@@ -44,7 +44,7 @@ jobs:
       - name: Build build stage
         run: |
           docker build --progress plain \
-            -t ${{ env.CACHE_IMAGE }}${{ env.TAG }}-build \
+            -t ${{ env.CACHE_IMAGE }}-${{ env.TAG }}-build \
             --cache-from ${{ env.CACHE_IMAGE }}-${{ env.TAG }}-build \
             --target build \
             -f Dockerfile.${{ env.BASE }} \
