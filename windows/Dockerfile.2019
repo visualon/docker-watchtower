@@ -13,6 +13,8 @@ LABEL maintainer="Michael Kriese <michael.kriese@visualon.de>" `
 
 ENTRYPOINT ["/bin/watchtower"]
 
+ENV DOCKER_HOST=npipe:////./pipe/docker_engine
+
 ARG WATCHTOWER_VERSION
 LABEL org.opencontainers.image.version="${WATCHTOWER_VERSION}"
 
