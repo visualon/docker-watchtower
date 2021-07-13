@@ -1,6 +1,8 @@
 #!/bin/bash
 
-FROM=$(cat Dockerfile | grep WATCHTOWER_VERSION)
+set -eo pipefail
+
+FROM=$(cat linux/Dockerfile | grep WATCHTOWER_VERSION)
 SEMVER_REGEX="=v?(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[a-z0-9]+)?"
 
 
@@ -14,6 +16,6 @@ minor=${BASH_REMATCH[2]}
 patch=${BASH_REMATCH[3]}
 
 
-export VERSION="${major}.${minor}.${patch}"
-
+VERSION="${major}.${minor}.${patch}"
 echo "VERSION=${VERSION}" >> $GITHUB_ENV
+echo "Found version: ${VERSION}"
