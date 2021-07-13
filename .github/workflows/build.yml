@@ -54,6 +54,7 @@ jobs:
             -f Dockerfile.${{ env.BASE }} \
             .
         working-directory: ./windows
+        shell: bash
 
       - name: Test run
         run: ./test.cmd
