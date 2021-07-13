@@ -1,13 +1,12 @@
-version: "3.7"
 services:
   sut:
     image: "${IMAGE}"
-    environment: 
+    environment:
       WATCHTOWER_RUN_ONCE: 'true'
       WATCHTOWER_NO_PULL: 'true'
     volumes:
       - source: '\\.\pipe\docker_engine'
         target: '\\.\pipe\docker_engine'
         type: npipe
-    labels: 
+    labels:
       com.centurylinklabs.watchtower.enable: false

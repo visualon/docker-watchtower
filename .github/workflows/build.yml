@@ -8,7 +8,7 @@ env:
   FILE: watchtower
   IMAGE: ghcr.io/${{ github.repository_owner }}/watchtower
 
-concurrency: 
+concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
   cancel-in-progress: true
 
