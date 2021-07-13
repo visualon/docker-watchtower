@@ -25,12 +25,14 @@ jobs:
     env:
       BASE: ${{ matrix.os }}
       TAG: windows-${{ matrix.os }}
-      CACHE_IMAGE: ghcr.io/${{ env.OWNER }}/cache:${{ env.FILE }}
 
     steps:
       - uses: actions/checkout@v2.3.4
 
       - run: ./bin/init.sh
+        shell: bash
+
+      - run: echo "CACHE_IMAGE=ghcr.io/${{ env.OWNER }}/cache:${{ env.FILE }}" >> $GITHUB_ENV
         shell: bash
 
         # ignore not yet existing images
