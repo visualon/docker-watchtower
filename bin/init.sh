@@ -8,7 +8,7 @@ SEMVER_REGEX="=v?(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[a-z0-9]+)?"
 
 if ! [[ "$FROM" =~ $SEMVER_REGEX ]]; then
   echo Not a semver tag - skipping
-  exit
+  exit 1
 fi
 
 major=${BASH_REMATCH[1]}
