@@ -8,6 +8,8 @@ FROM alpine:3.14@sha256:234cb88d3020898631af0ccbbcca9a66ae7306ecd30c9720690858c1
 #=================
 FROM base as build
 
+RUN apk add --no-cache curl
+
 ARG WATCHTOWER_VERSION
 RUN set -ex; \
   curl -sSfLo file.tgz https://github.com/containrrr/watchtower/releases/download/${WATCHTOWER_VERSION}/watchtower_linux_amd64.tar.gz; \
