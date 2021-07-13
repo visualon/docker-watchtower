@@ -1,0 +1,158 @@
+name: build
+
+on:
+  push:
+
+env:
+  OWNER: ${{ github.repository_owner }}
+  FILE: watchtower
+  IMAGE: ghcr.io/${{ github.repository_owner }}/watchtower
+
+jobs:
+  init:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2.3.4
+
+      - run: ./bin/init.sh
+
+  windows:
+    needs: init
+
+    runs-on: windows-${{ matrix.os }}
+
+    timeout-minutes: 60
+
+    strategy:
+      matrix:
+        os: [2019]
+
+    env:
+      BASE: ${{ matrix.os }}
+      TAG: windows-${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2.3.4
+
+      # ignore not yet existing images
+      - name: Fetch the Docker image
+        run: |
+          docker pull ${{ env.IMAGE }}
+          docker pull ${{ env.IMAGE }}:${{ env.TAG }}
+          docker pull ${{ env.IMAGE }}:${{ env.VERSION }}
+        continue-on-error: true
+
+      - name: Build the Docker image
+        run: |
+          docker build --progress plain \
+            -t ${{ env.IMAGE }}:${{ env.TAG }} \
+            -t ${{ env.IMAGE }}:${{ env.VERSION }}-${{ env.TAG }} \
+            --cache-from ${{ env.IMAGE }} \
+            --cache-from ${{ env.IMAGE }}:${{ env.TAG }} \
+            --cache-from ${{ env.IMAGE }}:${{ env.VERSION }}-${{ env.TAG }} \
+            -f Dockerfile.${{ env.BASE }} \
+            .
+        working-directory: ./windows
+
+      - name: Test run
+        run: ./test.cmd
+        working-directory: ./windows
+        env:
+          IMAGE: ${{ env.IMAGE }}:${{ env.TAG }}
+
+      - name: Log into registry
+        if: github.ref == 'refs/heads/main'
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+
+      - name: Publish the Docker image
+        if: github.ref == 'refs/heads/main'
+        run: |
+          docker push ${{ env.IMAGE }}:${{ env.TAG }}
+          docker push ${{ env.IMAGE }}:${{ env.VERSION }}-${{ env.TAG }}
+
+  linux:
+    needs: init
+
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 30
+
+    env:
+      TAG: linux-amd64
+
+    steps:
+      - uses: actions/checkout@v2.3.4
+
+      - name: docker-config
+        uses: renovatebot/internal-tools@v1.6.17
+        with:
+          command: docker-config
+
+      - name: Build the Docker image
+        run: docker buildx bake --progress plain test
+
+      - name: Test run
+        run: docker-compose --file docker-compose.test.yml run sut
+        working-directory: ./linux
+        env:
+          IMAGE: ${{ env.IMAGE }}:${{ env.TAG }}
+
+      - name: Log into registry
+        if: github.ref == 'refs/heads/main'
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+
+      - name: Publish the Docker image
+        if: github.ref == 'refs/heads/main'
+        run: docker buildx bake build
+
+  multi-arch:
+    needs: [linux, windows]
+
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v2.3.4
+
+      - name: docker-config
+        uses: renovatebot/internal-tools@v1.6.17
+        with:
+          command: docker-config
+
+      - name: Log into registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+
+      - name: Build the Docker multiarch manifest
+        run: |
+          docker manifest create ${{ env.IMAGE }} ${{ env.IMAGE }}:linux ${{ env.IMAGE }}:windows-2019
+          docker manifest create ${{ env.IMAGE }}:${{ env.VERSION }} \
+            ${{ env.IMAGE }}:${{ env.VERSION }}-linux \
+            ${{ env.IMAGE }}:${{ env.VERSION }}-windows-2019
+
+      - name: Publish the Docker multiarch manifest
+        run: |
+          docker manifest push ${{ env.IMAGE }}
+          docker manifest push ${{ env.IMAGE }}:${{ env.VERSION }}
+
+      - name: Inspect the Docker multiarch manifest
+        run: docker manifest inspect ${{ env.IMAGE }}
+
+  release:
+    needs: multi-arch
+
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v2.3.4
+
+      - uses: ncipollo/release-action@v1.8.6
+        with:
+          allowUpdates: true
+          body: See https://github.com/containrrr/watchtower/releases/tag/v${{ env.VERSION }} for more changes
+          commit: ${{ github.sha }}
+          tag: v${{ env.VERSION }}
+          token: ${{ secrets.GITHUB_TOKEN }}
