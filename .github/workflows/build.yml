@@ -40,7 +40,7 @@ jobs:
         run: |
           docker pull ${{ env.IMAGE }}
           docker pull ${{ env.IMAGE }}:${{ env.TAG }}
-          docker pull ${{ env.IMAGE }}:${{ env.VERSION }}
+          docker pull ${{ env.IMAGE }}:${{ env.VERSION }}-${{ env.TAG }}
         continue-on-error: true
 
       - name: Build the Docker image
