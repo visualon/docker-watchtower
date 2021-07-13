@@ -57,7 +57,9 @@ jobs:
         shell: bash
 
       - name: Test run
-        run: ./test.cmd
+        run: | 
+          ./test.cmd
+          docker-compose --file docker-compose.test.yml run sut
         working-directory: ./windows
         env:
           IMAGE: ${{ env.IMAGE }}:${{ env.TAG }}
