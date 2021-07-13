@@ -10,10 +10,9 @@ FROM mcr.microsoft.com/windows/servercore:ltsc2019@sha256:6dfc9ed8c6048a7a45fba9
 
 ARG WATCHTOWER_VERSION
 RUN `
-  mkdir tmp && cd tmp`
+  mkdir tmp && mkdir c:\bin && cd tmp`
 	&& curl -sSfLo file.zip https://github.com/containrrr/watchtower/releases/download/%WATCHTOWER_VERSION%/watchtower_windows_amd64.zip `
-  && tar -oxzf file.zip `
-  && move watchtower.exe c:\bin `
+  && tar -C c:\bin -oxzf file.zip `
   && /bin/watchtower --help
 
 #=================
