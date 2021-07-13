@@ -153,9 +153,11 @@ jobs:
 
       - name: Build the Docker multiarch manifest
         run: |
-          docker manifest create ${{ env.IMAGE }} ${{ env.IMAGE }}:linux ${{ env.IMAGE }}:windows-2019
+          docker manifest create ${{ env.IMAGE }} \
+            ${{ env.IMAGE }}:linux-amd64 \
+            ${{ env.IMAGE }}:windows-2019
           docker manifest create ${{ env.IMAGE }}:${{ env.VERSION }} \
-            ${{ env.IMAGE }}:${{ env.VERSION }}-linux \
+            ${{ env.IMAGE }}:${{ env.VERSION }}-linux-amd64 \
             ${{ env.IMAGE }}:${{ env.VERSION }}-windows-2019
 
       - name: Publish the Docker multiarch manifest
