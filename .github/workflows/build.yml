@@ -35,32 +35,15 @@ jobs:
           echo "CACHE_IMAGE=ghcr.io/${{ env.OWNER }}/cache:${{ env.FILE }}" >> $GITHUB_ENV
         shell: bash
 
-        # ignore not yet existing images
-      - name: Fetch build stage
-        run: |
-          docker pull ${{ env.CACHE_IMAGE }}-${{ env.TAG }}-build
-        continue-on-error: true
-
-      - name: Build build stage
-        run: |
-          docker build --progress plain \
-            -t ${{ env.CACHE_IMAGE }}-${{ env.TAG }}-build \
-            --cache-from ${{ env.CACHE_IMAGE }}-${{ env.TAG }}-build \
-            --target build \
-            -f Dockerfile.${{ env.BASE }} \
-            .
-        working-directory: ./windows
-        shell: bash
-
       # ignore not yet existing images
-      - name: Fetch the final images
+      - name: Fetch the docker images
         run: |
           docker pull ${{ env.IMAGE }}
           docker pull ${{ env.IMAGE }}:${{ env.TAG }}
           docker pull ${{ env.IMAGE }}:${{ env.VERSION }}-${{ env.TAG }}
         continue-on-error: true
 
-      - name: Build the final image
+      - name: Build the docker image
         run: |
           docker build --progress plain \
             -t ${{ env.IMAGE }}:${{ env.TAG }} \
@@ -68,7 +51,6 @@ jobs:
             --cache-from ${{ env.IMAGE }} \
             --cache-from ${{ env.IMAGE }}:${{ env.TAG }} \
             --cache-from ${{ env.IMAGE }}:${{ env.VERSION }}-${{ env.TAG }} \
-            --cache-from ${{ env.CACHE_IMAGE }}-${{ env.TAG }}-build \
             -f Dockerfile.${{ env.BASE }} \
             .
         working-directory: ./windows
@@ -89,7 +71,6 @@ jobs:
         run: |
           docker push ${{ env.IMAGE }}:${{ env.TAG }}
           docker push ${{ env.IMAGE }}:${{ env.VERSION }}-${{ env.TAG }}
-          docker push ${{ env.CACHE_IMAGE }}-${{ env.TAG }}-build
 
   linux:
     runs-on: ubuntu-latest
@@ -149,7 +130,6 @@ jobs:
 
       - name: Init
         run: ./bin/init.sh
-        shell: bash
 
       - name: Build the Docker multiarch manifest
         run: |
@@ -176,6 +156,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2.3.4
+
+      - name: Init
+        run: ./bin/init.sh
 
       - uses: ncipollo/release-action@v1.8.6
         with:
