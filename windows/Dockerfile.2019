@@ -5,6 +5,8 @@ ARG WATCHTOWER_VERSION=v1.3.0
 
 FROM mcr.microsoft.com/windows/nanoserver:1809-amd64@sha256:502ecb75e37ada29fa102f92437a0b55504290a715a607d83a2b371811b00d44
 
+USER ContainerAdministrator
+
 LABEL maintainer="Michael Kriese <michael.kriese@visualon.de>" `
   org.opencontainers.image.authors="Michael Kriese <michael.kriese@visualon.de>" `
   org.opencontainers.image.licenses="MIT" `
