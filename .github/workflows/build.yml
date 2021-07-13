@@ -29,10 +29,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2.3.4
 
-      - run: ./bin/init.sh
-        shell: bash
-
-      - run: echo "CACHE_IMAGE=ghcr.io/${{ env.OWNER }}/cache:${{ env.FILE }}" >> $GITHUB_ENV
+      - name: Init
+        run: |
+          ./bin/init.sh
+          echo "CACHE_IMAGE=ghcr.io/${{ env.OWNER }}/cache:${{ env.FILE }}" >> $GITHUB_ENV
         shell: bash
 
         # ignore not yet existing images
@@ -102,7 +102,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2.3.4
 
-      - run: ./bin/init.sh
+      - name: Init
+        run: ./bin/init.sh
         shell: bash
 
       - name: docker-config
@@ -146,7 +147,8 @@ jobs:
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
 
-      - run: ./bin/init.sh
+      - name: Init
+        run: ./bin/init.sh
         shell: bash
 
       - name: Build the Docker multiarch manifest
