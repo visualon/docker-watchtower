@@ -1,0 +1,30 @@
+# escape=`
+
+# renovate: datasource=github-releases depName=watchtower lookupName=containrrr/watchtower
+ARG WATCHTOWER_VERSION=1.3.0
+
+FROM mcr.microsoft.com/windows/nanoserver:ltsc2022@sha256:3df3372895223b44475125ab3553fd39a71d89a896099d463d3216f1e22a3ab0
+
+USER ContainerAdministrator
+
+LABEL maintainer="Michael Kriese <michael.kriese@visualon.de>" `
+  org.opencontainers.image.authors="Michael Kriese <michael.kriese@visualon.de>" `
+  org.opencontainers.image.licenses="MIT" `
+  org.opencontainers.image.source="https://github.com/visualon/docker-watchtower" `
+  org.opencontainers.image.url="https://github.com/visualon/docker-watchtower"
+
+LABEL com.centurylinklabs.watchtower="true"
+
+ENTRYPOINT ["/bin/watchtower"]
+
+ENV DOCKER_HOST=npipe:////./pipe/docker_engine
+
+ARG WATCHTOWER_VERSION
+LABEL org.opencontainers.image.version="${WATCHTOWER_VERSION}"
+
+RUN `
+  mkdir tmp && mkdir bin`
+	&& curl -sSfLo tmp/file.zip https://github.com/containrrr/watchtower/releases/download/v%WATCHTOWER_VERSION%/watchtower_windows_amd64.zip `
+  && tar -C c:\bin -oxzf tmp/file.zip watchtower.exe`
+  && rmdir /Q /S tmp `
+  && /bin/watchtower --help
