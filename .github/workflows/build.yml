@@ -27,7 +27,7 @@ jobs:
       TAG: windows-${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@1e204e9a9253d643386038d443f96446fa156a97 # renovate: tag=v2.3.5
+      - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2.4.0
 
       - name: Init
         run: ./bin/init.sh
@@ -79,7 +79,7 @@ jobs:
       TAG: linux-amd64
 
     steps:
-      - uses: actions/checkout@1e204e9a9253d643386038d443f96446fa156a97 # renovate: tag=v2.3.5
+      - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2.4.0
 
       - name: Init
         run: ./bin/init.sh
@@ -116,7 +116,7 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - uses: actions/checkout@1e204e9a9253d643386038d443f96446fa156a97 # renovate: tag=v2.3.5
+      - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2.4.0
 
       - name: docker-config
         uses: renovatebot/internal-tools@ba8cd25dca8f977f71143adcab39b0fa06705398 # renovate: tag=v1.9.2
@@ -155,7 +155,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
-      - uses: actions/checkout@1e204e9a9253d643386038d443f96446fa156a97 # renovate: tag=v2.3.5
+      - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2.4.0
 
       - name: Init
         run: ./bin/init.sh
