@@ -86,7 +86,7 @@ jobs:
         shell: bash
 
       - name: docker-config
-        uses: renovatebot/internal-tools@7bbc8c127ffd87a8305ac1d261667b359bd7300f # renovate: tag=v1.11.6
+        uses: renovatebot/internal-tools@092b9cb68d2248d0eb4b9e7d15fd0f03078241df # renovate: tag=v1.11.7
         with:
           command: docker-config
 
@@ -119,7 +119,7 @@ jobs:
       - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2.4.0
 
       - name: docker-config
-        uses: renovatebot/internal-tools@7bbc8c127ffd87a8305ac1d261667b359bd7300f # renovate: tag=v1.11.6
+        uses: renovatebot/internal-tools@092b9cb68d2248d0eb4b9e7d15fd0f03078241df # renovate: tag=v1.11.7
         with:
           command: docker-config
 
