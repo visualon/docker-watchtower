@@ -160,7 +160,7 @@ jobs:
       - name: Init
         run: ./bin/init.sh
 
-      - uses: ncipollo/release-action@40bb172bd05f266cf9ba4ff965cb61e9ee5f6d01 # renovate: tag=v1.9.0
+      - uses: ncipollo/release-action@58ae73b360456532aafd58ee170c045abbeaee37 # tag=v1.10.0
         with:
           allowUpdates: true
           body: See https://github.com/containrrr/watchtower/releases/tag/v${{ env.VERSION }} for more changes
