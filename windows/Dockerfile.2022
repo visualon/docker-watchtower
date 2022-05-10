@@ -3,7 +3,7 @@
 # renovate: datasource=github-releases depName=watchtower lookupName=containrrr/watchtower
 ARG WATCHTOWER_VERSION=1.4.0
 
-FROM mcr.microsoft.com/windows/nanoserver:ltsc2022@sha256:9c9ed294412e94762469596d89c19fceae13b29509d14ca88c099aee178e9167
+FROM mcr.microsoft.com/windows/nanoserver:ltsc2022@sha256:f677b64d44434c6850f075630c3a7b3f9be284d32003c2cc6ea93130f619152f
 
 USER ContainerAdministrator
 
