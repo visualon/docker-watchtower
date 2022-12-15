@@ -28,7 +28,7 @@ jobs:
       TAG: windows-${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # tag=v3.1.0
+      - uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0
 
       - name: Init
         run: ./bin/init.sh
@@ -80,7 +80,7 @@ jobs:
       TAG: linux-amd64
 
     steps:
-      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # tag=v3.1.0
+      - uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0
 
       - name: Init
         run: ./bin/init.sh
@@ -117,7 +117,7 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # tag=v3.1.0
+      - uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0
 
       - name: docker-config
         uses: renovatebot/internal-tools@1a64621ad4bbef261f9e9ecbb529df9cfb6b3142 # v1.14.8
@@ -156,7 +156,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
-      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # tag=v3.1.0
+      - uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0
 
       - name: Init
         run: ./bin/init.sh
