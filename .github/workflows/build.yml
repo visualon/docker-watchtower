@@ -87,7 +87,7 @@ jobs:
         shell: bash
 
       - name: docker-config
-        uses: renovatebot/internal-tools@7778512bff496865804bf1c70d9c925defcb697c # v1.14.13
+        uses: renovatebot/internal-tools@5300db677841fbc464dc831e7bb11902b45b8b69 # v1.15.0
         with:
           command: docker-config
 
@@ -120,7 +120,7 @@ jobs:
       - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
 
       - name: docker-config
-        uses: renovatebot/internal-tools@7778512bff496865804bf1c70d9c925defcb697c # v1.14.13
+        uses: renovatebot/internal-tools@5300db677841fbc464dc831e7bb11902b45b8b69 # v1.15.0
         with:
           command: docker-config
 
