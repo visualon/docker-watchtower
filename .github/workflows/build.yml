@@ -8,6 +8,7 @@ env:
   FILE: watchtower
   IMAGE: ghcr.io/${{ github.repository_owner }}/watchtower
   BUILDKIT_PROGRESS: plain
+  BUILDX_NO_DEFAULT_ATTESTATIONS: true
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
