@@ -169,7 +169,7 @@ jobs:
       - name: Init
         run: ./bin/init.sh
 
-      - uses: ncipollo/release-action@a2e71bdd4e7dab70ca26a852f29600c98b33153e # v1.12.0
+      - uses: ncipollo/release-action@6c75be85e571768fa31b40abf38de58ba0397db5 # v1.13.0
         with:
           allowUpdates: true
           body: See https://github.com/containrrr/watchtower/releases/tag/v${{ env.VERSION }} for more changes
