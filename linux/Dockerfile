@@ -1,5 +1,5 @@
 # renovate: datasource=github-releases depName=watchtower lookupName=containrrr/watchtower
-ARG WATCHTOWER_VERSION=1.5.3
+ARG WATCHTOWER_VERSION=1.6.0
 
 FROM alpine:3.18@sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978 as base
 
