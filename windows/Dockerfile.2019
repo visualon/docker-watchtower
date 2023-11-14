@@ -1,7 +1,7 @@
 # escape=`
 
 # renovate: datasource=github-releases depName=watchtower lookupName=containrrr/watchtower
-ARG WATCHTOWER_VERSION=1.6.0
+ARG WATCHTOWER_VERSION=1.7.0
 
 FROM mcr.microsoft.com/windows/nanoserver:1809@sha256:bed3cb2d55f44371fdeebdabf97e8679347748c16dec0d2c351e25fb0b7bbb32
 
