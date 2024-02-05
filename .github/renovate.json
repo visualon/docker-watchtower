@@ -5,13 +5,20 @@
     "visualon/renovate-config:automergePatch",
     ":automergeMinor"
   ],
-  "labels": ["deps"],
+  "labels": [
+    "deps"
+  ],
   "digest": {
-    "extends": ["schedule:daily"]
+    "extends": [
+      "schedule:daily"
+    ]
   },
   "packageRules": [
     {
-      "packageNames": ["watchtower", "containrrr/watchtower"],
+      "matchPackageNames": [
+        "watchtower",
+        "containrrr/watchtower"
+      ],
       "extractVersion": "^v(?<version>\\d+\\.\\d+\\.\\d+)$"
     }
   ]
