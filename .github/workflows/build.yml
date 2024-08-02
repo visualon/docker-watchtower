@@ -17,7 +17,7 @@ concurrency:
 permissions:
   contents: read
   packages: write
-      
+
 jobs:
   windows:
     runs-on: windows-${{ matrix.os }}
@@ -61,7 +61,7 @@ jobs:
         shell: bash
 
       - name: Test run
-        run:  docker-compose --file docker-compose.test.yml run sut
+        run:  docker compose --file docker-compose.test.yml run sut
         working-directory: ./windows
         env:
           IMAGE: ${{ env.IMAGE }}:${{ env.TAG }}
@@ -100,7 +100,7 @@ jobs:
         run: docker buildx bake test
 
       - name: Test run
-        run: docker-compose --file docker-compose.test.yml run sut
+        run: docker compose --file docker-compose.test.yml run sut
         working-directory: ./linux
         env:
           IMAGE: ${{ env.IMAGE }}:${{ env.TAG }}
