@@ -2,7 +2,7 @@
 
 set -eo pipefail
 
-FROM=$(cat linux/Dockerfile | grep WATCHTOWER_VERSION)
+FROM=$(grep WATCHTOWER_VERSION linux/Dockerfile)
 SEMVER_REGEX="=v?(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[a-z0-9]+)?"
 
 
