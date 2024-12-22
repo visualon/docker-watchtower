@@ -17,5 +17,5 @@ patch=${BASH_REMATCH[3]}
 
 
 VERSION="${major}.${minor}.${patch}"
-echo "VERSION=${VERSION}" >> $GITHUB_ENV
+echo "VERSION=${VERSION}" >> "$GITHUB_ENV"
 echo "Found version: ${VERSION}"
