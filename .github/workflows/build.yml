@@ -26,7 +26,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [2019,2022]
+        os: [2019,2022,2025]
 
     env:
       BASE: ${{ matrix.os }}
@@ -140,11 +140,13 @@ jobs:
           docker manifest create ${{ env.IMAGE }} \
             ${{ env.IMAGE }}:linux-amd64 \
             ${{ env.IMAGE }}:windows-2019 \
-            ${{ env.IMAGE }}:windows-2022
+            ${{ env.IMAGE }}:windows-2022 \
+            ${{ env.IMAGE }}:windows-2025
           docker manifest create ${{ env.IMAGE }}:${{ env.VERSION }} \
             ${{ env.IMAGE }}:${{ env.VERSION }}-linux-amd64 \
             ${{ env.IMAGE }}:${{ env.VERSION }}-windows-2019 \
-            ${{ env.IMAGE }}:${{ env.VERSION }}-windows-2022
+            ${{ env.IMAGE }}:${{ env.VERSION }}-windows-2022 \
+            ${{ env.IMAGE }}:${{ env.VERSION }}-windows-2025
 
       - name: Publish the Docker multiarch manifest
         run: |
