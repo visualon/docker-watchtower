@@ -12,7 +12,7 @@ RUN `
   && tar -C c:\bin -oxzf tmp/file.zip watchtower.exe`
   && /bin/watchtower --help
 
-FROM mcr.microsoft.com/windows/nanoserver:ltsc2022@sha256:23fa4e796f4d02d462beadb844f8985ca4583b1b0f75295137f5968dab255b09
+FROM mcr.microsoft.com/windows/nanoserver:ltsc2022@sha256:9a57174ce85e979529e4f0cd58dff2e837b65fc7832b7585b4882f6cce0e255d
 
 USER ContainerAdministrator
 
