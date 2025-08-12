@@ -64,6 +64,8 @@ jobs:
         shell: bash
 
       - name: Test run
+        # 2019 isn't compatible
+        if: matrix.os != 2019
         run:  docker compose --file docker-compose.test.yml run sut
         working-directory: ./windows
         env:
