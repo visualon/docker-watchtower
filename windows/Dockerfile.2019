@@ -3,6 +3,15 @@
 # renovate: datasource=github-releases depName=watchtower packageName=containrrr/watchtower
 ARG WATCHTOWER_VERSION=1.7.1
 
+FROM mcr.microsoft.com/windows/nanoserver:ltsc2025@sha256:51f6e78e1614200dcfe1ca13eec122082507d64c194820946570343e8d5c4281 AS build
+
+ARG WATCHTOWER_VERSION
+RUN `
+  mkdir tmp && mkdir bin`
+	&& curl -sSfLo tmp/file.zip https://github.com/containrrr/watchtower/releases/download/v%WATCHTOWER_VERSION%/watchtower_windows_amd64.zip `
+  && tar -C c:\bin -oxzf tmp/file.zip watchtower.exe`
+  && /bin/watchtower --help
+
 FROM mcr.microsoft.com/windows/nanoserver:1809@sha256:7c720f345ff7784cee12a5464bb5d5222c6348bd6da2cd29d666e49867958b0e
 
 USER ContainerAdministrator
@@ -22,9 +31,4 @@ ENV DOCKER_HOST=npipe:////./pipe/docker_engine
 ARG WATCHTOWER_VERSION
 LABEL org.opencontainers.image.version="${WATCHTOWER_VERSION}"
 
-RUN `
-  mkdir tmp && mkdir bin`
-	&& curl -sSfLo tmp/file.zip https://github.com/containrrr/watchtower/releases/download/v%WATCHTOWER_VERSION%/watchtower_windows_amd64.zip `
-  && tar -C c:\bin -oxzf tmp/file.zip watchtower.exe`
-  && rmdir /Q /S tmp `
-  && /bin/watchtower --help
+COPY --from=build /bin /bin
