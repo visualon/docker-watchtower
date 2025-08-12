@@ -20,13 +20,16 @@ permissions:
 
 jobs:
   windows:
-    runs-on: windows-${{ matrix.os }}
+    runs-on: windows-2025
 
     timeout-minutes: 60
 
     strategy:
       matrix:
-        os: [2019,2022,2025]
+        os:
+        - 2019
+        - 2022
+        - 2025
 
     env:
       BASE: ${{ matrix.os }}
