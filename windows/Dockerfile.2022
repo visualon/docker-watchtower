@@ -8,7 +8,7 @@ FROM mcr.microsoft.com/windows/nanoserver:ltsc2025@sha256:2c49bcfc2b32e56ef272c3
 ARG WATCHTOWER_VERSION
 RUN `
   mkdir tmp && mkdir bin`
-	&& curl -sSfLo tmp/file.zip https://github.com/nicholas-fedor/watchtower/releases/download/v%WATCHTOWER_VERSION%/watchtower_windows_amd64_${WATCHTOWER_VERSION}.zip `
+	&& curl -sSfLo tmp/file.zip https://github.com/nicholas-fedor/watchtower/releases/download/v%WATCHTOWER_VERSION%/watchtower_windows_amd64_%WATCHTOWER_VERSION%.zip `
   && tar -C c:\bin -oxzf tmp/file.zip watchtower.exe`
   && /bin/watchtower --help
 
