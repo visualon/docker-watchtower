@@ -1,25 +1,20 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "visualon/renovate-config",
-    "visualon/renovate-config:automergePatch",
-    ":automergeMinor"
-  ],
-  "labels": [
-    "deps"
-  ],
+  "extends": ["visualon/renovate-config", "visualon/renovate-config:automergePatch", ":automergeMinor"],
+  "labels": ["deps"],
   "digest": {
-    "extends": [
-      "schedule:daily"
-    ]
+    "extends": ["schedule:daily"]
   },
   "packageRules": [
     {
-      "matchPackageNames": [
-        "watchtower",
-        "nicholas-fedor/watchtower"
-      ],
+      "matchPackageNames": ["watchtower", "nicholas-fedor/watchtower"],
       "extractVersion": "^v(?<version>\\d+\\.\\d+\\.\\d+)$"
+    },
+    {
+      "description": "group docker digests",
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["digest"],
+      "groupName": "docker-digests"
     }
   ]
 }
