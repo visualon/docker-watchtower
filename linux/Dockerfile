@@ -27,7 +27,7 @@ LABEL maintainer="Michael Kriese <michael.kriese@visualon.de>" \
     org.opencontainers.image.authors="Michael Kriese <michael.kriese@visualon.de>" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.source="https://github.com/visualon/docker-watchtower" \
-    org.opencontainers.image.url="https://github.com/visualon/docker-watchtower"
+    org.opencontainers.image.url="https://watchtower.nickfedor.com"
 
 LABEL com.centurylinklabs.watchtower="true"
 
@@ -38,3 +38,4 @@ LABEL org.opencontainers.image.version="${WATCHTOWER_VERSION}"
 
 COPY --from=build /bin/watchtower /bin/
 
+HEALTHCHECK CMD ["/bin/watchtower", "--health-check"]
