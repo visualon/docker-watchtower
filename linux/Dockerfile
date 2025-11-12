@@ -12,7 +12,7 @@ RUN apk add --no-cache curl
 
 ARG WATCHTOWER_VERSION
 RUN set -ex; \
-  curl -sSfLo file.tgz https://github.com/nicholas-fedor/watchtower/releases/download/v${WATCHTOWER_VERSION}/watchtower_linux_amd64.tar.gz; \
+  curl -sSfLo file.tgz https://github.com/nicholas-fedor/watchtower/releases/download/v${WATCHTOWER_VERSION}/watchtower_linux_amd64_${WATCHTOWER_VERSION}.tar.gz; \
   tar -C /bin -xzf file.tgz; \
   watchtower --help
 
