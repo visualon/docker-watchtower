@@ -1,5 +1,5 @@
 # renovate: datasource=github-releases depName=watchtower packageName=nicholas-fedor/watchtower
-ARG WATCHTOWER_VERSION=1.7.13
+ARG WATCHTOWER_VERSION=1.12.2
 
 FROM alpine:3.22@sha256:4b7ce07002c69e8f3d704a9c5d6fd3053be500b7f1c69fc0d80990c2ad8dd412 as base
 
@@ -12,7 +12,7 @@ RUN apk add --no-cache curl
 
 ARG WATCHTOWER_VERSION
 RUN set -ex; \
-  curl -sSfLo file.tgz https://github.com/nicholas-fedor/watchtower/releases/download/v${WATCHTOWER_VERSION}/watchtower_linux_amd64.tar.gz; \
+  curl -sSfLo file.tgz https://github.com/nicholas-fedor/watchtower/releases/download/v${WATCHTOWER_VERSION}/watchtower_linux_amd64_${WATCHTOWER_VERSION}.tar.gz; \
   tar -C /bin -xzf file.tgz; \
   watchtower --help
 

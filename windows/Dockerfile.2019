@@ -1,14 +1,14 @@
 # escape=`
 
 # renovate: datasource=github-releases depName=watchtower packageName=nicholas-fedor/watchtower
-ARG WATCHTOWER_VERSION=1.7.13
+ARG WATCHTOWER_VERSION=1.12.2
 
 FROM mcr.microsoft.com/windows/nanoserver:ltsc2025@sha256:88a45eb14a45c111131ce1464d0e3b5ae545e3c0ea8dcbe9cf0b8c60c848f08a AS build
 
 ARG WATCHTOWER_VERSION
 RUN `
   mkdir tmp && mkdir bin`
-	&& curl -sSfLo tmp/file.zip https://github.com/nicholas-fedor/watchtower/releases/download/v%WATCHTOWER_VERSION%/watchtower_windows_amd64.zip `
+	&& curl -sSfLo tmp/file.zip https://github.com/nicholas-fedor/watchtower/releases/download/v%WATCHTOWER_VERSION%/watchtower_windows_amd64_%WATCHTOWER_VERSION%.zip `
   && tar -C c:\bin -oxzf tmp/file.zip watchtower.exe`
   && /bin/watchtower --help
 
