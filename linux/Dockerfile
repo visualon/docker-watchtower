@@ -1,25 +1,25 @@
-# renovate: datasource=github-releases depName=watchtower packageName=containrrr/watchtower
-ARG WATCHTOWER_VERSION=1.7.1
+# renovate: datasource=github-releases depName=watchtower packageName=nicholas-fedor/watchtower
+ARG WATCHTOWER_VERSION=1.7.2
 
 FROM alpine:3.22@sha256:4b7ce07002c69e8f3d704a9c5d6fd3053be500b7f1c69fc0d80990c2ad8dd412 as base
 
 #=================
 # build
 #=================
-FROM base as build
+FROM base AS build
 
 RUN apk add --no-cache curl
 
 ARG WATCHTOWER_VERSION
 RUN set -ex; \
-  curl -sSfLo file.tgz https://github.com/containrrr/watchtower/releases/download/v${WATCHTOWER_VERSION}/watchtower_linux_amd64.tar.gz; \
+  curl -sSfLo file.tgz https://github.com/nicholas-fedor/watchtower/releases/download/v${WATCHTOWER_VERSION}/watchtower_linux_amd64.tar.gz; \
   tar -C /bin -xzf file.tgz; \
   watchtower --help
 
 #=================
 # final
 #=================
-FROM base as final
+FROM base AS final
 
 RUN apk add --no-cache ca-certificates tzdata dumb-init
 

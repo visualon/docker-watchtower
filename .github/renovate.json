@@ -17,7 +17,7 @@
     {
       "matchPackageNames": [
         "watchtower",
-        "containrrr/watchtower"
+        "cnicholas-fedor/watchtower"
       ],
       "extractVersion": "^v(?<version>\\d+\\.\\d+\\.\\d+)$"
     }

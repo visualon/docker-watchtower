@@ -179,7 +179,7 @@ jobs:
       - uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1.20.0
         with:
           allowUpdates: true
-          body: See https://github.com/containrrr/watchtower/releases/tag/v${{ env.VERSION }} for more changes
+          body: See https://github.com/cnicholas-fedor/watchtower/releases/tag/v${{ env.VERSION }} for more changes
           commit: ${{ github.sha }}
           name: ${{ env.VERSION }}
           tag: v${{ env.VERSION }}
