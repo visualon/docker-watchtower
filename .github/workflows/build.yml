@@ -101,7 +101,7 @@ jobs:
         shell: bash
 
       - name: docker-config
-        uses: containerbase/internal-tools@f84621abbc75c66d17dff3782dbed0438430aec6 # v3.14.26
+        uses: containerbase/internal-tools@ed77a56ba412aa05f6ab51c25972d017439f8e3b # v3.14.27
         with:
           command: docker-config
 
@@ -134,7 +134,7 @@ jobs:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
       - name: docker-config
-        uses: containerbase/internal-tools@f84621abbc75c66d17dff3782dbed0438430aec6 # v3.14.26
+        uses: containerbase/internal-tools@ed77a56ba412aa05f6ab51c25972d017439f8e3b # v3.14.27
         with:
           command: docker-config
 
