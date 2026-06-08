@@ -36,6 +36,34 @@ jobs:
       TAG: windows-${{ matrix.os }}
 
     steps:
+      ###########################
+      #    Docker Readiness     #
+      ###########################
+      # https://github.com/actions/runner-images/issues/13729
+      - name: Ensure Docker daemon is ready
+        shell: powershell
+        run: |
+          $maxRetries = 10
+          $retryDelay = 6
+          for ($i = 0; $i -lt $maxRetries; $i++) {
+            $svc = Get-Service docker -ErrorAction SilentlyContinue
+            if ($svc -and $svc.Status -eq 'Running') {
+              docker version 2>$null
+              if ($LASTEXITCODE -eq 0) {
+                Write-Host "Docker is ready."
+                exit 0
+              }
+            }
+            if ($svc -and $svc.Status -eq 'Stopped') {
+              Write-Host "Docker service stopped, attempting to start..."
+              Start-Service docker -ErrorAction SilentlyContinue
+            }
+            Write-Host "Waiting for Docker daemon (attempt $($i+1)/$maxRetries)..."
+            Start-Sleep -Seconds $retryDelay
+          }
+          Write-Error "Docker daemon did not start within $($maxRetries * $retryDelay) seconds"
+          exit 1
+
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - run: docker info
