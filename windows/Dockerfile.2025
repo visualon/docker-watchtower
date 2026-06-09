@@ -3,7 +3,7 @@
 # renovate: datasource=github-releases depName=watchtower packageName=nicholas-fedor/watchtower
 ARG WATCHTOWER_VERSION=1.17.2
 
-FROM mcr.microsoft.com/windows/nanoserver:ltsc2025@sha256:6e992d90503fcac01630020f8114c31cacf7a2a189f5c50a94e442478257972c AS build
+FROM mcr.microsoft.com/windows/nanoserver:ltsc2025@sha256:c71ca7f010608e202e62df477ca19542dd9c44e2a20508af8f92ff63859b0540 AS build
 
 ARG WATCHTOWER_VERSION
 RUN `
@@ -12,7 +12,7 @@ RUN `
   && tar -C c:\bin -oxzf tmp/file.zip watchtower.exe`
   && /bin/watchtower --help
 
-FROM mcr.microsoft.com/windows/nanoserver:ltsc2025@sha256:6e992d90503fcac01630020f8114c31cacf7a2a189f5c50a94e442478257972c
+FROM mcr.microsoft.com/windows/nanoserver:ltsc2025@sha256:c71ca7f010608e202e62df477ca19542dd9c44e2a20508af8f92ff63859b0540
 
 USER ContainerAdministrator
 
