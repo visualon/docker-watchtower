@@ -1,7 +1,7 @@
 # escape=`
 
 # renovate: datasource=github-releases depName=watchtower packageName=nicholas-fedor/watchtower
-ARG WATCHTOWER_VERSION=1.19.0
+ARG WATCHTOWER_VERSION=1.20.0
 
 FROM mcr.microsoft.com/windows/nanoserver:ltsc2025@sha256:fda578d34f56de2f60d91a178fd954fdc95596ebb67b3bc363deb708ef1fd94c AS build
 
